@@ -8,16 +8,12 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_start"
+        android:id="@+id/btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="start service" />
+        android:text="服务" />
 
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="stop service" />
+
 
 
 </LinearLayout>

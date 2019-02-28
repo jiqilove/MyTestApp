@@ -16,8 +16,8 @@ import android.util.Log;
 import com.example.mytestapp.MainActivity;
 import com.example.mytestapp.R;
 
-public class ForgroundService extends Service {
-
+public class ForegroundService extends Service {
+    private static final String TAG = "ForegroundService";
 
     @Nullable
     @Override
@@ -32,24 +32,29 @@ public class ForgroundService extends Service {
         showNotification();
     }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.e(TAG, "onStartCommand:" );
+        return super.onStartCommand(intent, flags, startId);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void showNotification(){
-        Log.e("cnb", "showNotification: " );
-        Notification.Builder builder =new Notification.Builder(this)
+    private void showNotification() {
+        Log.e("onCreate", "showNotification: ");
+        Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("2019-02-28")
                 .setContentText("这是是从服务开启的通知");
-        Intent intent =new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(intent);
-        PendingIntent pendingIntent =stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(pendingIntent);
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification =builder.build();
-        nm.notify(0,notification);
-        startForeground(0,notification);
+        Notification notification = builder.build();
+        nm.notify(0, notification);
+        startForeground(0, notification);
 
     }
 }
