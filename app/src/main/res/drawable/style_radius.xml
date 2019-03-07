@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<corners>    //定义圆角-->
+    <!--根据需要指定圆角-->
+    <!--android:bottomLeftRadius=""-->
+    <!--android:bottomRightRadius=""-->
+    <!--android:topLeftRadius=""-->
+    <!--android:topRightRadius=""-->
+    <corners android:radius="10dp" />
+
+
+    <!--<solid > //定义填充颜色-->
+    <solid android:color="@color/colorPrimary" />
+
+
+    <!--边框效果-->
+    <!--android:dashWidth="1dp"     //虚线宽度-->
+    <!--android:dashGap="13dp"     //虚线间隔-->
+    <stroke
+        android:width="5dp"
+        android:color="#000"
+        android:dashWidth="5dp"
+        android:dashGap="5dp" />
+</shape>

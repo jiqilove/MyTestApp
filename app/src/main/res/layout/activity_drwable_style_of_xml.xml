@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f8f8f8"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".drawable_xml_test.DrwableStyleOfXMLActivity">
+
+        <!--边框-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_radius1"
+                android:gravity="center"
+                android:text="边框圆角"
+                android:textColor="#444444"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_radius"
+                android:gravity="center"
+                android:text="边框圆有虚线"
+                android:textColor="#444444"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <!--渐变-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_gradient"
+                android:gravity="center"
+                android:text="线性渐变"
+                android:textColor="#444444"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="线性渐变.代码实现"
+                android:textColor="#D6B8B8"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <!--渐变-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_gradient1"
+                android:gravity="center"
+                android:text="圆环渐变"
+                android:textColor="#444444"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="10dp"
+
+                android:background="@drawable/style_gradient2"
+                android:gravity="center"
+                android:text="圆形渐变"
+                android:textColor="#D6B8B8"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+
+                android:background="@drawable/style_gradient2"
+                android:gravity="center"
+                android:text="圆形渐变"
+                android:textColor="#D6B8B8"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <!--渐变-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_line"
+                android:gravity="center"
+                android:text="线条"
+                android:textColor="#444444"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_layer_1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_line"
+                android:gravity="center"
+                android:text="线条"
+                android:textColor="#444444"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_layer_2"
+
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_layer_list"
+                android:gravity="center"
+                android:text="layer_list"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+     <TextView
+                android:id="@+id/txt_layer_3"
+
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/style_layer_list1"
+                android:gravity="center"
+                android:text="layer_list"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
