@@ -22,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
         initListener();
-//        final Intent intent = new Intent(this, BluetoothActivityForBLE.class);
-//        startActivity(intent);
-//
-        final Intent intent = new Intent(this, DrwableStyleOfXMLActivity.class);
+        final Intent intent = new Intent(this, BluetoothActivityForBLE.class);
         startActivity(intent);
+
+
+
+        //        final Intent intent = new Intent(this, DrwableStyleOfXMLActivity.class);
+//        startActivity(intent);
     }
 
     private void initListener() {

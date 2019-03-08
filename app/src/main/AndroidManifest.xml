@@ -32,6 +32,7 @@
 
         <service android:name=".service.MyTestService" />
         <service android:name=".service.ForegroundService" />
+        <service android:name=".bluetooth_BLE.BluetoothLEService" />
     </application>
 
 </manifest>
