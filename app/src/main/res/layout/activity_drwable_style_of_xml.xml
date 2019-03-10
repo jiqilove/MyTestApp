@@ -11,6 +11,52 @@
         android:orientation="vertical"
         tools:context=".drawable_xml_test.DrwableStyleOfXMLActivity">
 
+
+        <Button
+            android:id="@+id/btn_layer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_bg"
+            android:text="Layer Drawable"
+            android:textColor="#fff" />
+        <Button
+            android:id="@+id/btn_level"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_bg"
+            android:text="level Drawable"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/btn_transition"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_bg"
+            android:text="transition Drawable"
+            android:textColor="#fff" />
+        <Button
+            android:id="@+id/btn_my_drawable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_bg"
+            android:text="my_drawable Drawable"
+            android:textColor="#fff" />
         <!--边框-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,7 +206,8 @@
                 android:text="layer_list"
                 android:textColor="#fff"
                 android:textSize="20sp" />
-     <TextView
+
+            <TextView
                 android:id="@+id/txt_layer_3"
 
                 android:layout_width="120dp"

@@ -97,6 +97,12 @@ public class BluetoothActivityForConnect extends AppCompatActivity {
                     connect=false;
                     Log.e("我是广播", "onReceive: 断开连接" );
                     tv_status.setText("断开连接");
+                }else if (action.equals(BluetoothLEService.ONCHARACTERISTICCHANGED)){
+
+                    connect=false;
+                    byte [] buffer =intent.getByteArrayExtra("aa");
+                    Log.e(TAG, "onReceive: "+buffer.length );
+
                 }
             }
 

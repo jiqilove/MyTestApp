@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn1"
+        android:id="@+id/btn_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="服务" />
@@ -20,6 +20,12 @@
         android:text="蓝牙" />
 
 
+
+    <Button
+        android:id="@+id/btn_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="drawable xml文件的样式" />
 
 
 

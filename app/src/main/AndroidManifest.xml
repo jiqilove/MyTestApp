@@ -18,7 +18,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".drawable_xml_test.DrwableStyleOfXMLActivity"></activity>
+        <activity android:name=".drawable_xml_test.MyDrawableActivity"></activity>
+        <activity android:name=".drawable_xml_test.TransitionDrawableActivity" />
+        <activity android:name=".drawable_xml_test.LevelListDrawableActivity" />
+        <activity android:name=".drawable_xml_test.LayerDrawableActivity" />
+        <activity
+            android:name=".regular.RegularActivity"
+            android:label="@string/title_activity_regular"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".drawable_xml_test.DrwableStyleOfXMLActivity" />
         <activity android:name=".bluetooth_BLE.BluetoothActivityForConnect" />
         <activity android:name=".bluetooth_BLE.BluetoothActivityForBLE" />
         <activity android:name=".service.ServiceActivity" />

@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
+import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
@@ -16,6 +17,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import java.util.List;
 
 public class BluetoothLEService extends Service {
     //连接
@@ -28,8 +31,10 @@ public class BluetoothLEService extends Service {
     public final static String ACTION_DATA_AVAILABLE = "com.example.mytestapp.bluetooth_BLE.ACTION_DATA_AVAILABLE";
 
     public final static String EXTRA_DATA = "com.example.mytestapp.bluetooth_BLE.EXTRA_DATA";
+    public final static String ONCHARACTERISTICCHANGED = "com.example.mytestapp.bluetooth_BLE.ONCHARACTERISTICCHANGED";
 
 
+    private static  String uuid ="00002b00-0000-1000-8000-00805f9b34fb";
     public BleBinder bleBinder = new BleBinder();
     private BluetoothGatt gatt;
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
@@ -41,6 +46,8 @@ public class BluetoothLEService extends Service {
 
            if (newState== BluetoothProfile.STATE_CONNECTED){
                broadcastUpdate(ACTION_GATT_CONNECTED);
+               gatt.discoverServices();
+
            }else if (newState ==BluetoothProfile.STATE_DISCONNECTED){
                broadcastUpdate(ACTION_GATT_DISCONNECTED);
            }
@@ -49,34 +56,81 @@ public class BluetoothLEService extends Service {
         }
 
         @Override
-        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-
+        public void onServicesDiscovered(BluetoothGatt gatt1, int status) {
+            BluetoothGattCharacteristic aaa=null;
+            BluetoothGattCharacteristic aaa1=null;
+            BluetoothGattCharacteristic aaa2=null;
             if (status == BluetoothGatt.GATT_SUCCESS) {
 //                broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
+                List<BluetoothGattService> supportedGattServices = gatt1.getServices();
+
+                for (BluetoothGattService gattService : supportedGattServices) {
+                    //得到每个Service的Characteristics
+                    List<BluetoothGattCharacteristic> gattCharacteristics = gattService.getCharacteristics();
+                    for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
+                        int charaProp = gattCharacteristic.getProperties();
+                        //所有Characteristics按属性分类
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                            Log.d(TAG, "gattCharacteristic的UUID为:" + gattCharacteristic.getUuid());
+                            Log.d(TAG, "gattCharacteristic的属性为:  可读");
+                            if (gattCharacteristic.getUuid().toString().equals("00002b10-0000-1000-8000-00805f9b34fb")){
+                                Log.e(TAG, "onServicesDiscovered: read" );
+                                gatt.readCharacteristic(gattCharacteristic);
+
+                            }
+//                            readUuid.add(gattCharacteristic.getUuid());
+                        }
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
+                            Log.d(TAG, "gattCharacteristic的UUID为:" + gattCharacteristic.getUuid());
+                            Log.d(TAG, "gattCharacteristic的属性为:  可写");
+//                            writeUuid.add(gattCharacteristic.getUuid());
+                            if (gattCharacteristic.getUuid().toString().equals("00002b11-0000-1000-8000-00805f9b34fb")){
+                                Log.e(TAG, "onServicesDiscovered: write" );
+                                gatt.writeCharacteristic(gattCharacteristic);
+
+                            }
+
+                        }
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                            Log.d(TAG, "gattCharacteristic的UUID为:" + gattCharacteristic.getUuid() + gattCharacteristic);
+                            Log.d(TAG, "gattCharacteristic的属性为:  具备通知属性");
+//                            notifyUuid.add(gattCharacteristic.getUuid());
+                        }
+                    }
+                }
 
             }
+
+
             Log.e(TAG, "onServicesDiscovered: "+gatt+"=="+status+"==="  );
-            super.onServicesDiscovered(gatt, status);
+//            super.onServicesDiscovered(gatt, status);
         }
 
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+          byte [] buffer =  characteristic.getValue();
+          Intent intent =new Intent();
+          intent.putExtra("aa",buffer);
+          intent.setAction("onCharacteristicChanged");
+
+            sendBroadcast(intent);
+
             Log.e(TAG, "onCharacteristicChanged: "+gatt+"=="+characteristic );
-            super.onCharacteristicChanged(gatt, characteristic);
+
+//            super.onCharacteristicChanged(gatt, characteristic);
         }
 
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             Log.e(TAG, "onCharacteristicRead: "+gatt+"==="+characteristic+"==="+status );
-            super.onCharacteristicRead(gatt, characteristic, status);
+//            super.onCharacteristicRead(gatt, characteristic, status);
         }
 
 
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             Log.e(TAG, "onCharacteristicWrite: "+gatt+"==="+characteristic+"==="+status );
-            super.onCharacteristicWrite(gatt, characteristic, status);
         }
 
 
