@@ -18,7 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".drawable_xml_test.MyDrawableActivity"></activity>
+        <activity android:name=".receiver.ReceiverMainActivity"></activity>
+        <activity android:name=".bluetooth_classic.BluetoothClassicActivity" />
+        <activity android:name=".pull_to_refresh.PullActivity" />
+        <activity android:name=".drawable_xml_test.MyDrawableActivity" />
         <activity android:name=".drawable_xml_test.TransitionDrawableActivity" />
         <activity android:name=".drawable_xml_test.LevelListDrawableActivity" />
         <activity android:name=".drawable_xml_test.LayerDrawableActivity" />
@@ -30,6 +33,7 @@
         <activity android:name=".bluetooth_BLE.BluetoothActivityForConnect" />
         <activity android:name=".bluetooth_BLE.BluetoothActivityForBLE" />
         <activity android:name=".service.ServiceActivity" />
+        <!--<activity android:name=".service.ServiceActivity" />-->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +45,28 @@
         <service android:name=".service.MyTestService" />
         <service android:name=".service.ForegroundService" />
         <service android:name=".bluetooth_BLE.BluetoothLEService" />
+
+        <receiver android:name=".receiver.CnbBroadCastReeiver">
+
+            <!-- 接收那些广播 -->
+            <intent-filter>
+
+                <!-- 开机广播 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <!-- 电量低 -->
+                <action android:name="android.intent.action.BATTERY_LOW" />
+
+                <!-- 应用安装 -->
+                <action android:name="android.intent.action.PACKAGE_INSTALL" />
+
+                <!-- 应用卸载 -->
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <!-- 数据类型 -->
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

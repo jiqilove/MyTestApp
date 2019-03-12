@@ -26,23 +26,38 @@ import android.widget.TextView;
 import com.example.mytestapp.R;
 import com.example.mytestapp.service.MyTestService;
 
+import java.nio.charset.Charset;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static android.bluetooth.BluetoothAdapter.STATE_CONNECTED;
 
 public class BluetoothActivityForConnect extends AppCompatActivity {
 
     private static final String TAG = "BluetoothActivityForCon";
     private BluetoothDevice device;
-    private TextView tv_name, tv_address,tv_status;
+    @BindView(R.id.txt_name)
+    TextView tv_name;
+    @BindView(R.id.txt_address)
+    TextView tv_address;
+    @BindView(R.id.txt_status)
+    TextView tv_status;
+
+    @BindView(R.id.btn_connect)
+    Button btn_connect;
+    @BindView(R.id.btn_stop)
+    Button btn_stop;
+
     private String txt_name_str;
     private String txt_address_str;
-    private Button btn_connect, btn_stop;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_for_connect);
+        ButterKnife.bind(this);
         initView();
         initDate();
         connect();
@@ -62,7 +77,7 @@ public class BluetoothActivityForConnect extends AppCompatActivity {
                     bluetoothLEService = ((BluetoothLEService.BleBinder) service).getService();
                     // 初始化蓝牙；
 
-                    if (!bluetoothLEService.initialize()){ //不能初始化，，没有蓝牙
+                    if (!bluetoothLEService.initialize()) { //不能初始化，，没有蓝牙
                         return;
                     }
 
@@ -72,36 +87,44 @@ public class BluetoothActivityForConnect extends AppCompatActivity {
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                bluetoothLEService=null;
+                bluetoothLEService = null;
             }
         };
 
-         Intent gattServiceIntent = new Intent(this, BluetoothLEService.class);
+        Intent gattServiceIntent = new Intent(this, BluetoothLEService.class);
         bindService(gattServiceIntent, serviceConnection, BIND_AUTO_CREATE);
     }
-    private boolean connect =false;
 
-    private final BroadcastReceiver broadcastReceiver =new BroadcastReceiver() {
+    private boolean connect = false;
+
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         //这边的 广播就是充当一个更新UI的中介
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            final  String action =intent.getAction();
-            if (action!=null){
-                if (action.equals(BluetoothLEService.ACTION_GATT_CONNECTED)){
-                    connect =true;
-                    Log.e("我是广播", "onReceive: 连接成功" );
+            final String action = intent.getAction();
+            if (action != null) {
+                if (action.equals(BluetoothLEService.ACTION_GATT_CONNECTED)) {
+                    connect = true;
+                    Log.e("我是广播", "onReceive: 连接成功");
                     tv_status.setText("连接成功");
-                }else if (action.equals(BluetoothLEService.ACTION_GATT_DISCONNECTED)){
+                } else if (action.equals(BluetoothLEService.ACTION_GATT_DISCONNECTED)) {
 
-                    connect=false;
-                    Log.e("我是广播", "onReceive: 断开连接" );
+                    connect = false;
+                    Log.e("我是广播", "onReceive: 断开连接");
                     tv_status.setText("断开连接");
-                }else if (action.equals(BluetoothLEService.ONCHARACTERISTICCHANGED)){
+                } else if (action.equals(BluetoothLEService.ONCHARACTERISTICCHANGED)) {
 
-                    connect=false;
-                    byte [] buffer =intent.getByteArrayExtra("aa");
-                    Log.e(TAG, "onReceive: "+buffer.length );
+                    connect = false;
+                    byte[] buffer = intent.getByteArrayExtra("aa");
+                    Log.e(TAG, "onReceive: " + buffer.length);
+
+                }else if (action.equals(BluetoothLEService.ONCHARACTERISTICREAD)) {
+//                    byte[] buffer = null;
+//                    connect = false;
+//                  buffer = intent.getByteExtra("aa",);
+//                    String s = new String(buffer);
+//                    Log.e(TAG, "onReceive: " + buffer.length +"---"+s);
 
                 }
             }
@@ -110,17 +133,11 @@ public class BluetoothActivityForConnect extends AppCompatActivity {
     };
 
     private void initView() {
-        tv_name = findViewById(R.id.txt_name);
-        tv_address = findViewById(R.id.txt_address);
-        tv_status = findViewById(R.id.txt_status);
-        btn_connect = findViewById(R.id.btn_connect);
-        btn_stop = findViewById(R.id.btn_stop);
-
 
         btn_connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "onClick: " );
+                Log.e(TAG, "onClick: ");
                 //都可以，那就连接
                 bluetoothLEService.connect(txt_address_str);
 
@@ -129,7 +146,7 @@ public class BluetoothActivityForConnect extends AppCompatActivity {
         btn_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              bluetoothLEService.disconnect();
+                bluetoothLEService.disconnect();
 
             }
         });
@@ -148,12 +165,15 @@ public class BluetoothActivityForConnect extends AppCompatActivity {
         }
 
     }
+
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothLEService.ACTION_GATT_CONNECTED);
         intentFilter.addAction(BluetoothLEService.ACTION_GATT_DISCONNECTED);
         intentFilter.addAction(BluetoothLEService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLEService.ACTION_DATA_AVAILABLE);
+        intentFilter.addAction(BluetoothLEService.ONCHARACTERISTICCHANGED);
+        intentFilter.addAction(BluetoothLEService.ONCHARACTERISTICREAD);
         return intentFilter;
     }
 
@@ -170,7 +190,7 @@ public class BluetoothActivityForConnect extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (broadcastReceiver!=null){
+        if (broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
         }
     }
@@ -178,8 +198,7 @@ public class BluetoothActivityForConnect extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (bluetoothLEService!=null){
-
+        if (bluetoothLEService != null) {
             unbindService(serviceConnection);
             bluetoothLEService = null;
         }

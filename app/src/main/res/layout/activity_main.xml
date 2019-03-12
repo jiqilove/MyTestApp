@@ -13,12 +13,17 @@
         android:layout_height="wrap_content"
         android:text="服务" />
 
-        <Button
+    <Button
         android:id="@+id/btn_blue_tooth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="蓝牙" />
+        android:text="蓝牙ble" />
 
+    <Button
+        android:id="@+id/btn_blue_tooth_classic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="经典蓝牙" />
 
 
     <Button
@@ -26,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="drawable xml文件的样式" />
+
 
 
 
