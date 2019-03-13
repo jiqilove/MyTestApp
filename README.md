@@ -4,7 +4,7 @@
 
  
 
-         recyclerViewHelper = new RecyclerViewHelper<UserBean>(PullActivity.this, recyclerView, R.layout.item_user) {
+         recyclerViewHelper = new RecyclerViewHelper<T>(context, recyclerView, layout) {
 
              @Override
  
