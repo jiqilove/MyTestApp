@@ -2,7 +2,6 @@
 我的各种测试小栗子
 ## RecyclerView 简单设置
 
- 
 
          recyclerViewHelper = new RecyclerViewHelper<T>(context, recyclerView, layout) {
 
@@ -23,4 +22,15 @@
         //======水平分割线、垂直分割线======== 
         recyclerViewHelper.addItemDecoration();
 
+ ## BindView 绑定
  
+ ### 以后会继续添加更多的方法
+ 
+      myViewHolder.setText(id, “str”);
+      myViewHolder.setOnClickListener(id, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.e("cnb", "===" + position);
+                    }
+                });
+
