@@ -23,6 +23,7 @@ public class MyDivider extends RecyclerView.ItemDecoration {
     private RecyclerView recyclerView;
 
 
+    //====默认颜色和默认分割线 color e5e5e5  分割线高度3px
     public MyDivider(Context context, RecyclerView recyclerView) {
         dividerPaint = new Paint();
         dividerPaint.setColor(context.getResources().getColor(R.color.gary_e5e5e5));
@@ -40,6 +41,7 @@ public class MyDivider extends RecyclerView.ItemDecoration {
         span = getSpanCount(recyclerView);
     }
 
+    // ====自定义颜色和分割线颜色====
     public MyDivider(Context context, int color, int dividerHeightOfDp, RecyclerView recyclerView) {
         dividerPaint = new Paint();
         dividerPaint.setColor(color);
@@ -62,17 +64,6 @@ public class MyDivider extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.bottom = dividerHeight;
-
-//        if (isLastRow(parent.getChildLayoutPosition(view)))// 如果是最后一行，则不需要绘制底部
-//        {
-//            outRect.set(0, 0, 0, 0);
-//        }
-//
-//        if (isLastColum(parent.getChildLayoutPosition(view)))// 如果是最后一列，则不需要绘制右边
-//        {
-//            outRect.set(0, 0, 0, 0);
-//        }
-
     }
 
     @Override
@@ -87,7 +78,7 @@ public class MyDivider extends RecyclerView.ItemDecoration {
     private void drawVertical(Canvas c, RecyclerView parent) {
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount - 1; i++) {
-            if ((i + 1) % span == 0) { //如果是最后一列，直接下一个子view
+            if ((i + 1) % span == 0) { //如果是最后一列，直接下一个子view·
                 continue;
             }
             View view = parent.getChildAt(i);
@@ -102,15 +93,12 @@ public class MyDivider extends RecyclerView.ItemDecoration {
 
     //水平线条
     private void drawHorizontal(Canvas c, RecyclerView parent) {
-
         int childCount = parent.getChildCount();
-
         int unDrawCount = 1; //不需要绘制的子 view
         if (drawGrid) {
             unDrawCount = span;
         }
         for (int i = 0; i < childCount - unDrawCount; i++) {
-
             View view = parent.getChildAt(i);
             int left = view.getLeft();
             int right = view.getRight();
@@ -151,7 +139,6 @@ public class MyDivider extends RecyclerView.ItemDecoration {
             }
         }
         return false;
-
     }
 
 }

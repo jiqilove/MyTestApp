@@ -29,23 +29,14 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter<Bas
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
         BaseViewHolder baseViewHolder = new BaseViewHolder(inflater.inflate(layoutId, viewGroup, false));
-//        MaterialRippleLayout
-
         return baseViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, int i) {
-
         bindData(baseViewHolder,date.get(i), i);
     }
-
-
-
-
-
 
     @Override
     public int getItemCount() {

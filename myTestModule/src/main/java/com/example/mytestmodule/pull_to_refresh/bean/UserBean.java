@@ -1,4 +1,4 @@
-package com.example.mytestmodule.pull_to_refresh;
+package com.example.mytestmodule.pull_to_refresh.bean;
 
 public class UserBean {
     public UserBean(String name, String age) {
