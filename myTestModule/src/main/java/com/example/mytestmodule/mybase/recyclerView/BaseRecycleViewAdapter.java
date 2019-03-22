@@ -40,7 +40,7 @@ public abstract class BaseRecycleViewAdapter<T> extends RecyclerView.Adapter<Bas
 
     @Override
     public int getItemCount() {
-        return date == null ? 0 : date.size();
+        return date == null ? 0 : (date.size() );
     }
 
     protected abstract void bindData(BaseViewHolder baseViewHolder, T date,int position);

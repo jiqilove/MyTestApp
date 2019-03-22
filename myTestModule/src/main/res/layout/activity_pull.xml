@@ -7,16 +7,27 @@
     android:orientation="vertical"
     tools:context=".pull_to_refresh.PullActivity">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:id="@+id/swipeRefreshLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+
+    <com.example.mytestmodule.pull_to_refresh.SwipeRefreshLView
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="400dp">
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.example.mytestmodule.pull_to_refresh.SwipeRefreshLView>
+
+
+
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
 
 </LinearLayout>

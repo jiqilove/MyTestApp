@@ -1,1 +1,1 @@
-include ':app', ':myTestModule'
+include ':app', ':myTestModule', ':myweekview'

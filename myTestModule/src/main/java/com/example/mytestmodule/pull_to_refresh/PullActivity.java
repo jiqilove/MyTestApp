@@ -3,6 +3,7 @@ package com.example.mytestmodule.pull_to_refresh;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +24,7 @@ public class PullActivity extends AppCompatActivity {
     private List<UserBean> datas;
     private RecyclerView recyclerView;
     private Context mContext = PullActivity.this;
-    private SwipeRefreshLayout refreshLayout;
+    private SwipeRefreshLView refreshLayout;
     RecyclerViewHelper recyclerViewHelper;
     @SuppressLint("ResourceAsColor")
     @Override
@@ -69,17 +70,15 @@ public class PullActivity extends AppCompatActivity {
 
 
         refreshLayout.setColorSchemeColors(R.color.yellow_FFEB3B, R.color.colorAccent, R.color.colorPrimaryDark);
-
-
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                refreshLayout.setRefreshing(true);/
+                refreshLayout.setRefreshing(true);
                 refreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         List<UserBean>  dd = new ArrayList<>();
-                        for (int i = 0; i < 15; i++) {
+                        for (int i = 0; i < 5; i++) {
                             dd.add(new UserBean("xmz", "" + i));
                         }
                         recyclerViewHelper.setLoadMoreData(dd);
@@ -89,7 +88,20 @@ public class PullActivity extends AppCompatActivity {
                 }, 1200);
             }
         });
-        refreshLayout.setRefreshing(false);
+
+        refreshLayout.setOnLoadListener(new SwipeRefreshLView.OnLoadListener() {
+            @Override
+            public void onLoad() {
+//                refreshLayout.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+                        Log.e("cnb", "onLoad:6666ddddd " );
+//                        refreshLayout.setLoading(false);
+//                    }
+//                },1000);
+
+            }
+        });
 
     }
 

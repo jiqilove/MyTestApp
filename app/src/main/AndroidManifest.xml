@@ -42,7 +42,14 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.MyTestService" />
+        <service android:name=".service.MyTestService"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+
+                <action android:name="com.cnb.remote_startservice"/>
+            </intent-filter>
+        </service>
         <service android:name=".service.ForegroundService" />
         <service android:name=".bluetooth_BLE.BluetoothLEService" />
 

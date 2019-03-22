@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        startActivity(intent);
 
         //===============================蓝牙==============================================
         final Intent intent1 = new Intent(this, BluetoothActivityForBLE.class);
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-        startActivity(intent1);
+//        startActivity(intent1);
         //===============================经典蓝牙==============================================
         final Intent intent1_1 = new Intent(this, BluetoothClassicActivity.class);
         btn_blue_tooth_classic.setOnClickListener(new View.OnClickListener() {

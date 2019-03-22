@@ -4,11 +4,13 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.mytestapp.IMyAidlInterface;
 import com.example.mytestapp.R;
 
 public class ServiceActivity extends AppCompatActivity {
@@ -58,10 +60,19 @@ public class ServiceActivity extends AppCompatActivity {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
 
-                if (service instanceof MyTestService.MyBinder) {
-                    myBinder = (MyTestService.MyBinder) service;
-                    myBinder.showSuccess();
+                IMyAidlInterface iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service);
+
+                try {
+                    iMyAidlInterface.showProgress();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
                 }
+
+                //
+//  if (service instanceof MyTestService.MyBinder) {
+//                    myBinder = (MyTestService.MyBinder) service;
+//                    myBinder.showSuccess();
+//                }
 
             }
 
@@ -81,9 +92,9 @@ public class ServiceActivity extends AppCompatActivity {
         btn_stop2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (myBinder != null) {
+
                     unbindService(connection);
-                }
+
 
             }
         });
