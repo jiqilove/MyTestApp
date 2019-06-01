@@ -1,1 +1,1 @@
-include ':app', ':myTestModule', ':myweekview'
+include ':app', ':myTestModule', ':myweekview', ':restartactivity', ':spanalbestringtest', ':slidetest', ':mypermission'
